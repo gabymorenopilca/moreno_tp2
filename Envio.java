@@ -25,7 +25,7 @@ public class Envio {
         if (cabenPaquetes()) {
             paquetes.add(paquete);
         } else {
-            System.out.println("No se pueden agregar más de 3 paquetes.");
+            throw new Exception("No se pueden agregar más de 3 paquetes.");
         }
     }
 
