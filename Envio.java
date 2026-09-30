@@ -39,7 +39,7 @@ public class Envio {
 
     public void iniciarEnvio() {
         if (paquetes.isEmpty()) {
-            throw new IllegalStateException("No se puede enviar un envío sin paquetes");
+            throw new IllegalStateException("No se puede iniciar un envío sin paquetes");
         }
 
         for (Paquete paquete : paquetes) {
