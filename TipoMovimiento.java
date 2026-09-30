@@ -1,0 +1,6 @@
+public enum TipoMovimiento {
+    EN_PREPARACION,
+    RECIBIDO_EN_SUCURSAL,
+    DESPACHADO_DE_SUCURSAL,
+    ENVIO_ENTREGADO
+}
