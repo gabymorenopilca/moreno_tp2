@@ -1,35 +1,44 @@
 import java.util.ArrayList;
+import java.util.Date;
 
 public class RegistroSeguimiento {
-    ArrayList<String> registro;
+    private ArrayList<Movimiento> registro;
 
     public RegistroSeguimiento() {
-        registro = new ArrayList<String>();
+        registro = new ArrayList<Movimiento>();
     }
 
-    private void agregarRegistro(String estado) {
-        registro.add(estado);
+    private void agregarRegistro(Sucursal sucursal, TipoMovimiento tipoMov) {
+        registro.add(new Movimiento(new Date(), sucursal, tipoMov));
     }
 
     public void registrarPreparacion() {
-        agregarRegistro("Envío en preparación");
+        agregarRegistro(null, TipoMovimiento.EN_PREPARACION);
     }
 
-    public void registrarReciboSucursal(String sucursal) {
-        agregarRegistro("Envío recibido en Sucursal " + sucursal);
+    public void registrarReciboSucursal(Sucursal sucursal) {
+        agregarRegistro(sucursal, TipoMovimiento.RECIBIDO_EN_SUCURSAL);
     }
 
-    public void registrarDespachoSucursal(String sucursal) {
-        agregarRegistro("Envío despachado desde Sucursal " + sucursal);
+    public void registrarDespachoSucursal(Sucursal sucursal) {
+        agregarRegistro(sucursal, TipoMovimiento.DESPACHADO_DE_SUCURSAL);
     }
 
     public void registrarEntrega() {
-        agregarRegistro("Envío entregado");
+        agregarRegistro(null, TipoMovimiento.ENVIO_ENTREGADO);
+    }
+
+    public ArrayList<Movimiento> getRegistro() {
+        return registro;
     }
 
     public void mostrar() {
-        for (String reg : registro) {
-         System.out.println(reg);
-     }
- }
+        if (!registro.isEmpty()) {
+            for (Movimiento reg : registro) {
+                System.out.println(reg);
+            }
+        } else {
+            System.out.println("No hay registros que mostrar");
+        }
+    }
 }
