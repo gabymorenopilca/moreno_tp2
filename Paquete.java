@@ -27,21 +27,31 @@ public class Paquete {
         return peso;
     }
 
+    public EstadoPaquete getEstado() {
+        return estado;
+    }
+
     public void preparar() {
         if (estado == EstadoPaquete.RECIBIDO) {
             estado = EstadoPaquete.EN_PREPARACION;
+        } else {
+            throw new IllegalStateException("El paquete " + id + " debe estar recibido para ser preparado");
         }
     }
 
     public void enviarDistribucion() {
         if (estado == EstadoPaquete.EN_PREPARACION) {
             estado = EstadoPaquete.EN_DISTRIBUCION;
+        } else {
+            throw new IllegalStateException("El paquete " + id + " no se puede distribuir porque no está preparado");
         }
     }
 
     public void entregar() {
         if (estado == EstadoPaquete.EN_DISTRIBUCION) {
             estado = EstadoPaquete.ENTREGADO;
+        } else {
+            throw new IllegalStateException("El paquete " + id + " no se puede entregar porque no está en distribución");
         }
     }
 
