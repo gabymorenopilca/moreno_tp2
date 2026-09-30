@@ -12,17 +12,43 @@ public class Sucursal {
     }
 
     public void recibirEnvio(Envio envio) {
-        envio.recibirseEnSucursal(localidad);
+        if (envio == null) {
+            throw new IllegalArgumentException("El paquete no puede ser nulo");
+        }
+
+        if (envio.estaSinPaquetes()) {
+            throw new IllegalArgumentException("No se pueden recibir paquetes vacíos");
+        }
+
+        if (envio.estaEntregado()) {
+            throw new IllegalArgumentException("No se puede recibir un envío ya entregado");
+        }
+
+        if (envio.getSucursalActual() != null) {
+            throw new IllegalArgumentException("El envío todavía se encuentra en otra sucursal");
+        }
+
+        if (envios.contains(envio)) {
+            throw new IllegalArgumentException("El envío ya existe en esta sucursal");
+        }
+
+        envio.recibirseEnSucursal(this);
         envios.add(envio);
     }
 
     public Envio despacharEnvio() {
-        Envio despachado = envios.get(envios.size() - 1);
+        if (envios.isEmpty()) {
+            throw new IllegalStateException("No hay envíos para despachar");
+        }
 
-        envios.remove(envios.size() - 1);
+        Envio despachado = envios.remove(envios.size() - 1);
 
-        despachado.despacharseDeSucursal(localidad);
+        despachado.despacharseDeSucursal(this);
 
         return despachado;
+    }
+
+    public String getLocalidad() {
+        return localidad;
     }
 }
