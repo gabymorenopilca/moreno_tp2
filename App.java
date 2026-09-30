@@ -19,15 +19,23 @@ public class App {
 
         Envio envio1 = new EnvioEstandar(11532);
 
-        envio1.agregarPaquete(paq1);
-        envio1.agregarPaquete(paq2);
-        envio1.agregarPaquete(paq3);
+        try {
+            envio1.agregarPaquete(paq1);
+            envio1.agregarPaquete(paq2);
+            envio1.agregarPaquete(paq3);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
 
         envio1.mostrarInformacion();
 
         Envio envio2 = new EnvioExpress(11533);
 
-        envio2.agregarPaquete(paq4);
+        try {
+            envio2.agregarPaquete(paq4);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
 
         envio2.mostrarInformacion();
 
@@ -37,7 +45,11 @@ public class App {
 
         Envio envio3 = new EnvioInternacional(11534);
 
-        envio3.agregarPaquete(paq5);
+        try {
+            envio3.agregarPaquete(paq5);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
 
         envio3.mostrarInformacion();
 
@@ -45,15 +57,19 @@ public class App {
         envio1.iniciarEnvio();
 
         sucursal1.recibirEnvio(envio1);
+        System.out.println("Está en Sucursal " + sucursal4.getLocalidad() + "? " + envio1.estaEnSucursal(sucursal4));
         envio1 = sucursal1.despacharEnvio();
 
         sucursal2.recibirEnvio(envio1);
+        System.out.println("Está en Sucursal " + sucursal4.getLocalidad() + "? " + envio1.estaEnSucursal(sucursal4));
         envio1 = sucursal2.despacharEnvio();
 
         sucursal3.recibirEnvio(envio1);
+        System.out.println("Está en Sucursal " + sucursal4.getLocalidad() + "? " + envio1.estaEnSucursal(sucursal4));
         envio1 = sucursal3.despacharEnvio();
 
         sucursal4.recibirEnvio(envio1);
+        System.out.println("Está en Sucursal " + sucursal4.getLocalidad() + "? " + envio1.estaEnSucursal(sucursal4));
         envio1 = sucursal4.despacharEnvio();
 
         envio1.finalizarEnvio();
